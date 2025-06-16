@@ -35,4 +35,3 @@
 
 ---
 *Last Updated: [To be filled]*
-- 2025-06-17: Context7 ensures Atlas always uses current best practices

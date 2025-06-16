@@ -1,0 +1,41 @@
+# Session data (contains work context)
+sessions/
+!sessions/.gitkeep
+
+# Personal memory entries
+MEMORY/PERSONAL_DIARY/*/*/*.md
+MEMORY/KNOWLEDGE_LOG/*.md
+
+# Working logs with potentially sensitive data
+WORKING_LOG/*/*/*.md
+!WORKING_LOG/*/*/.gitkeep
+
+# Short term memory (project-specific)
+SHORT_IMPORTANT_MEMORY.md
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Environment
+venv/
+ENV/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Backups
+*.bak
+*.backup
+*~
