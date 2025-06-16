@@ -10,6 +10,14 @@ def setup_new_project():
     atlas_root = Path(__file__).parent.parent
     project_root = Path.cwd()
     
+    # Check if we're running from within the atlas directory
+    if atlas_root.resolve() == project_root.resolve():
+        print("❌ Error: Cannot run setup from within the .atlas directory!")
+        print("Please run this from your project directory:")
+        print("  cd /path/to/your/project")
+        print("  python .atlas/scripts/setup_new_project.py")
+        return
+    
     print("🚀 Setting up ATLAS for new project...")
     
     # Core files to copy
@@ -29,7 +37,7 @@ def setup_new_project():
     for file in core_files:
         src = atlas_root / file
         dst = project_root / file
-        if src.exists():
+        if src.exists() and src != dst:
             shutil.copy2(src, dst)
             print(f"✅ Copied {file}")
     

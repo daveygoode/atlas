@@ -11,6 +11,14 @@ def migrate_existing_project():
     atlas_root = Path(__file__).parent.parent
     project_root = Path.cwd()
     
+    # Check if we're running from within the atlas directory
+    if atlas_root.resolve() == project_root.resolve():
+        print("❌ Error: Cannot run migration from within the .atlas directory!")
+        print("Please run this from your project directory:")
+        print("  cd /path/to/your/project")
+        print("  python .atlas/scripts/migrate_existing_project.py")
+        return
+    
     print("🔄 Migrating existing project to ATLAS...")
     
     # Backup existing CLAUDE.md

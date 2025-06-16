@@ -31,27 +31,37 @@ The result? An AI coding companion that remembers your entire project history, m
 
 ## Quick Start
 
-### For New Projects
+### One-Line Install
 
 ```bash
-# Clone ATLAS into your project
+curl -sSL https://raw.githubusercontent.com/daveygoode/atlas/main/install.sh | bash
+```
+
+### Manual Installation
+
+#### For New Projects
+
+```bash
+# From your project directory (NOT from within .atlas)
 cd your-project-directory
 git clone https://github.com/daveygoode/atlas.git .atlas
-cd .atlas
 
-# Run automated setup
-python scripts/setup_new_project.py
+# Run setup from your project directory
+python .atlas/scripts/setup_new_project.py
 ```
 
-### For Existing Projects with CLAUDE.md
+#### For Existing Projects with CLAUDE.md
 
 ```bash
-# Clone ATLAS
-git clone https://github.com/daveygoode/atlas.git .atlas_temp
+# From your project directory (NOT from within .atlas)
+cd your-project-directory
+git clone https://github.com/daveygoode/atlas.git .atlas
 
-# Run migration
-python .atlas_temp/scripts/migrate_existing_project.py
+# Run migration from your project directory
+python .atlas/scripts/migrate_existing_project.py
 ```
+
+⚠️ **Important**: Always run setup scripts from your project directory, never from within the .atlas directory!
 
 ### Daily Workflow
 

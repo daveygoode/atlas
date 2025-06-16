@@ -4,12 +4,30 @@
 echo "🚀 ATLAS Quick Installer"
 echo "========================"
 
+# Check if we're already in the atlas directory
+if [ -f "IDENTITY.md" ] && [ -f "PROFESSIONAL_INSTRUCTION.md" ]; then
+    echo "❌ Error: You appear to be running this from within the ATLAS directory."
+    echo "Please run this from your project directory instead."
+    exit 1
+fi
+
+# Check if .atlas already exists
+if [ -d ".atlas" ]; then
+    echo "❌ Error: .atlas directory already exists."
+    echo "To reinstall, please remove it first: rm -rf .atlas"
+    exit 1
+fi
+
 # Check if we're in a git repository
 if [ -d ".git" ]; then
     echo "✅ Git repository detected"
 else
     echo "⚠️  Warning: Not in a git repository. ATLAS works best with git."
 fi
+
+# Clone ATLAS
+echo "📦 Cloning ATLAS repository..."
+git clone https://github.com/daveygoode/atlas.git .atlas
 
 # Check for existing CLAUDE.md
 if [ -f "CLAUDE.md" ]; then
@@ -23,32 +41,26 @@ if [ -f "CLAUDE.md" ]; then
     case $choice in
         1)
             echo "🔄 Running migration..."
-            git clone https://github.com/daveygoode/atlas.git .atlas_temp
-            python .atlas_temp/scripts/migrate_existing_project.py
-            rm -rf .atlas_temp
+            python .atlas/scripts/migrate_existing_project.py
             ;;
         2)
             echo "📦 Running fresh install..."
-            git clone https://github.com/daveygoode/atlas.git .atlas
-            cd .atlas
-            python scripts/setup_new_project.py
-            cd ..
+            python .atlas/scripts/setup_new_project.py
             ;;
         3)
             echo "❌ Installation cancelled"
+            rm -rf .atlas
             exit 0
             ;;
         *)
             echo "❌ Invalid choice"
+            rm -rf .atlas
             exit 1
             ;;
     esac
 else
     echo "📦 No existing CLAUDE.md found. Running fresh install..."
-    git clone https://github.com/daveygoode/atlas.git .atlas
-    cd .atlas
-    python scripts/setup_new_project.py
-    cd ..
+    python .atlas/scripts/setup_new_project.py
 fi
 
 echo ""
