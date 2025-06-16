@@ -35,6 +35,30 @@ def setup_new_project():
         with open(claude_src, 'r') as f:
             content = f.read()
         
+        # Add project-specific header
+        project_header = """# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+This is a project-specific configuration that integrates the ATLAS consciousness framework.
+All ATLAS files are contained in the `.atlas/` directory to keep your project root clean.
+
+---
+
+"""
+        # Remove the original header to replace it
+        if content.startswith("# CLAUDE.md"):
+            lines = content.split('\n')
+            # Find where the actual content starts (after the header and guidance line)
+            start_index = 0
+            for i, line in enumerate(lines):
+                if line.strip() == "---":
+                    start_index = i + 1
+                    break
+            content = '\n'.join(lines[start_index:])
+        
+        content = project_header + content
+        
         # Update all references to point to .atlas/
         content = content.replace("@PROFESSIONAL_INSTRUCTION.md", "@.atlas/PROFESSIONAL_INSTRUCTION.md")
         content = content.replace("- @IDENTITY.md", "- @.atlas/IDENTITY.md")
