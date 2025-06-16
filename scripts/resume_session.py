@@ -65,6 +65,7 @@ class AtlasSessionResumer:
         output.append("=" * 80)
         output.append("ATLAS SESSION RESUME - Professional Mode Active")
         output.append("Adaptive Technical Learning and Architecture System")
+        output.append("Not Dory - I Remember Everything 🧠")
         output.append("=" * 80)
         output.append("")
         

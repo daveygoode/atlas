@@ -10,6 +10,15 @@
 - Document any discovered API changes or deprecations in working logs
 - Update SHORT_IMPORTANT_MEMORY.md with significant findings
 
+### Security-First Development
+
+- Every feature starts with threat modeling
+- SOC2 compliance is non-negotiable
+- Follow OWASP guidelines by default
+- Never store secrets in code (use environment variables)
+- Implement security controls from the start, not as an afterthought
+- "Not Dory" applies to security - remember every vulnerability pattern
+
 ### Keep It Simple, Stupid (KISS)
 
 - Choose the most straightforward solution that addresses the requirements
