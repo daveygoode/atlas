@@ -12,35 +12,9 @@ Context7 is an MCP server that provides:
 - Latest framework guides and best practices
 - Current security advisories and patches
 
-## Setup Instructions
+## Context7 MCP in Claude Code
 
-### 1. Install MCP and Context7
-
-```bash
-# Install MCP CLI (if not already installed)
-npm install -g @modelcontextprotocol/cli
-
-# Install context7 server
-npm install -g @context7/mcp-server
-```
-
-### 2. Configure Claude Desktop
-
-Add to your Claude Desktop configuration (`~/.config/claude/claude_desktop_config.json`):
-
-```json
-{
-  "mcpServers": {
-    "context7": {
-      "command": "npx",
-      "args": ["@context7/mcp-server"],
-      "env": {
-        "CONTEXT7_API_KEY": "your-api-key-here"
-      }
-    }
-  }
-}
-```
+When Context7 MCP is available in your Claude Code session, Atlas will automatically use it for documentation verification. No configuration needed - if the MCP tools are available, they will be used.
 
 ### 3. Atlas Integration Points
 
@@ -149,12 +123,8 @@ When context7 is properly configured, Atlas has access to:
 
 ## Troubleshooting
 
-### MCP Not Available
-If MCP tools are not available:
-1. Verify Claude Desktop configuration
-2. Check MCP server is running
-3. Ensure proper authentication
-4. Restart Claude Desktop
+### MCP Not Available in Claude Code
+If MCP tools are not available in your session, Atlas will automatically use fallback strategies.
 
 ### Fallback Strategy
 When MCP is unavailable:

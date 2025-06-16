@@ -92,17 +92,10 @@ class AtlasSessionSaver:
     
     def check_mcp_availability(self):
         """Check if MCP tools are available (context7 specifically)"""
-        # This is a placeholder - in actual use, Claude would check for MCP availability
-        # For now, we'll check if the MCP config exists
-        mcp_config = Path.home() / ".config" / "claude" / "claude_desktop_config.json"
-        if mcp_config.exists():
-            try:
-                with open(mcp_config, 'r') as f:
-                    config = json.load(f)
-                    return "context7" in config.get("mcpServers", {})
-            except:
-                pass
-        return False
+        # In Claude Code, MCP availability is determined by the session
+        # This is a placeholder that Atlas will use to check actual availability
+        # during runtime by attempting to use the MCP tools
+        return "Check during runtime"
     
     def create_working_log_entry(self, context, next_task):
         """Create entry in Atlas WORKING_LOG structure"""
