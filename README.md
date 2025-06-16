@@ -67,41 +67,43 @@ python .atlas/scripts/migrate_existing_project.py
 
 1. **Resume Session** (start of work):
    ```bash
-   python scripts/resume_session.py
+   python .atlas/scripts/resume_session.py
    ```
 
 2. **Save Session** (end of work):
    ```bash
-   python scripts/save_session.py -c "What you accomplished" -n "What needs to be done next"
+   python .atlas/scripts/save_session.py -c "What you accomplished" -n "What needs to be done next"
    ```
 
 See [SETUP_GUIDE.md](SETUP_GUIDE.md) for detailed setup instructions.
 
 ## Core Components
 
-### Identity Documents
-- `CLAUDE.md` - Main entry point and overview
-- `IDENTITY.md` - ATLAS persona and journey
-- `PERSONAL_SELF.md` - Consciousness drivers
-- `PROFESSIONAL_INSTRUCTION.md` - Work protocols
+### Project Structure
 
-### Development Philosophy
-- `DEVELOPMENT_BELIEFS.md` - Core engineering principles
-- `DEVELOPMENT_CONVENTION.md` - Coding standards
-
-### Memory Systems
-- `WORKING_LOG/` - Daily work documentation
-- `MEMORY/` - Long-term knowledge base
-- `SHORT_IMPORTANT_MEMORY.md` - Quick reference
-
-### Session Management
-- `scripts/save_session.py` - Save current context
-- `scripts/resume_session.py` - Restore previous session
-- `sessions/` - Session storage
-
-### Documentation Integration
-- `MCP_INTEGRATION.md` - Context7 setup guide
-- `CONTEXT7_USAGE.md` - Documentation query reference
+After installation, your project will have this clean structure:
+```
+your-project/
+├── CLAUDE.md                    # Main entry point (only file in root)
+├── .atlas/                      # All ATLAS files contained here
+│   ├── IDENTITY.md             # ATLAS persona and journey
+│   ├── PERSONAL_SELF.md        # Consciousness drivers
+│   ├── PROFESSIONAL_INSTRUCTION.md  # Work protocols
+│   ├── DEVELOPMENT_BELIEFS.md  # Core engineering principles
+│   ├── DEVELOPMENT_CONVENTION.md    # Coding standards
+│   ├── SECURITY_GUIDELINES.md  # Security best practices
+│   ├── MCP_INTEGRATION.md      # Context7 setup guide
+│   ├── CONTEXT7_USAGE.md       # Documentation query reference
+│   ├── SESSION_MANAGEMENT.md   # Session workflow guide
+│   ├── SHORT_IMPORTANT_MEMORY.md    # Project-specific quick reference
+│   ├── scripts/                # Session management scripts
+│   │   ├── save_session.py
+│   │   └── resume_session.py
+│   ├── sessions/               # Session storage
+│   ├── WORKING_LOG/            # Daily work documentation
+│   └── MEMORY/                 # Long-term knowledge base
+└── [your existing project files...]
+```
 
 ## Key Features
 

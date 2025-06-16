@@ -14,7 +14,17 @@ from pathlib import Path
 
 class AtlasSessionResumer:
     def __init__(self):
-        self.atlas_root = Path(__file__).parent.parent
+        # Detect if we're running from within .atlas or from project root
+        script_path = Path(__file__).resolve()
+        if '.atlas' in script_path.parts:
+            # Running from .atlas/scripts/
+            self.atlas_root = Path(__file__).parent.parent
+            self.project_root = self.atlas_root.parent
+        else:
+            # Running from copied location (old structure)
+            self.project_root = Path.cwd()
+            self.atlas_root = self.project_root / ".atlas"
+        
         self.sessions_dir = self.atlas_root / "sessions"
         self.working_log_dir = self.atlas_root / "WORKING_LOG"
         

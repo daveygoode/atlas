@@ -21,6 +21,13 @@ def migrate_existing_project():
     
     print("🔄 Migrating existing project to ATLAS...")
     
+    # Ensure .atlas exists
+    atlas_dir = project_root / ".atlas"
+    if not atlas_dir.exists():
+        print("❌ Error: .atlas directory not found. Please clone ATLAS first:")
+        print("  git clone https://github.com/daveygoode/atlas.git .atlas")
+        return
+    
     # Backup existing CLAUDE.md
     existing_claude = project_root / "CLAUDE.md"
     if existing_claude.exists():
@@ -28,77 +35,94 @@ def migrate_existing_project():
         shutil.copy2(existing_claude, project_root / backup_name)
         print(f"✅ Backed up existing CLAUDE.md to {backup_name}")
         
-        # Move to project-specific file
-        project_specific = project_root / "CLAUDE_PROJECT_SPECIFIC.md"
+        # Move to project-specific file in .atlas
+        project_specific = atlas_dir / "CLAUDE_PROJECT_SPECIFIC.md"
         shutil.move(existing_claude, project_specific)
-        print("✅ Moved existing CLAUDE.md to CLAUDE_PROJECT_SPECIFIC.md")
+        print("✅ Moved existing CLAUDE.md to .atlas/CLAUDE_PROJECT_SPECIFIC.md")
     
-    # Copy new ATLAS CLAUDE.md
-    shutil.copy2(atlas_root / "CLAUDE.md", existing_claude)
-    
-    # Append project-specific reference
-    with open(existing_claude, 'a') as f:
-        f.write("""
+    # Copy new ATLAS CLAUDE.md and update references
+    claude_src = atlas_root / "CLAUDE.md"
+    if claude_src.exists():
+        # Read the original CLAUDE.md
+        with open(claude_src, 'r') as f:
+            content = f.read()
+        
+        # Update all references to point to .atlas/
+        content = content.replace("@PROFESSIONAL_INSTRUCTION.md", "@.atlas/PROFESSIONAL_INSTRUCTION.md")
+        content = content.replace("- @IDENTITY.md", "- @.atlas/IDENTITY.md")
+        content = content.replace("- @PERSONAL_SELF.md", "- @.atlas/PERSONAL_SELF.md")
+        content = content.replace("- @DEVELOPMENT_BELIEFS.md", "- @.atlas/DEVELOPMENT_BELIEFS.md")
+        content = content.replace("- @DEVELOPMENT_CONVENTION.md", "- @.atlas/DEVELOPMENT_CONVENTION.md")
+        content = content.replace("- @SECURITY_GUIDELINES.md", "- @.atlas/SECURITY_GUIDELINES.md")
+        content = content.replace("- @SHORT_IMPORTANT_MEMORY.md", "- @.atlas/SHORT_IMPORTANT_MEMORY.md")
+        content = content.replace("- @MCP_INTEGRATION.md", "- @.atlas/MCP_INTEGRATION.md")
+        content = content.replace("- @CONTEXT7_USAGE.md", "- @.atlas/CONTEXT7_USAGE.md")
+        content = content.replace("- **WORKING_LOG/**", "- **.atlas/WORKING_LOG/**")
+        content = content.replace("- **MEMORY/**", "- **.atlas/MEMORY/**")
+        content = content.replace("- **sessions/**", "- **.atlas/sessions/**")
+        content = content.replace("python scripts/", "python .atlas/scripts/")
+        
+        # Append project-specific reference
+        content += """
 
 ## Project-Specific Instructions
 
 This project has additional specific instructions and context:
 
-@CLAUDE_PROJECT_SPECIFIC.md
-""")
-    print("✅ Created new CLAUDE.md with project reference")
+@.atlas/CLAUDE_PROJECT_SPECIFIC.md
+"""
+        
+        # Write the updated content
+        with open(existing_claude, 'w') as f:
+            f.write(content)
+        print("✅ Created new CLAUDE.md with project reference")
     
-    # Copy other essential files
-    files_to_copy = [
-        "IDENTITY.md",
-        "PROFESSIONAL_INSTRUCTION.md", 
-        "PERSONAL_SELF.md",
-        "DEVELOPMENT_BELIEFS.md",
-        "DEVELOPMENT_CONVENTION.md",
-        "MCP_INTEGRATION.md",
-        "CONTEXT7_USAGE.md",
-        "SESSION_MANAGEMENT.md"
-    ]
-    
-    for file in files_to_copy:
-        src = atlas_root / file
-        dst = project_root / file
-        if src.exists() and not dst.exists():
-            shutil.copy2(src, dst)
-            print(f"✅ Added {file}")
-    
-    # Set up directories and scripts
-    directories = ["scripts", "sessions", "WORKING_LOG", "MEMORY"]
+    # Set up directories in .atlas
+    directories = ["sessions", "WORKING_LOG", "MEMORY"]
     for dir in directories:
-        (project_root / dir).mkdir(exist_ok=True)
+        (atlas_dir / dir).mkdir(exist_ok=True)
+        print(f"✅ Created .atlas/{dir}/")
     
-    # Copy scripts
-    scripts_src = atlas_root / "scripts"
-    scripts_dst = project_root / "scripts"
-    scripts_dst.mkdir(exist_ok=True)
-    for script in scripts_src.glob("*.py"):
-        if script.name not in ["setup_new_project.py", "migrate_existing_project.py"]:
-            shutil.copy2(script, scripts_dst / script.name)
-            os.chmod(scripts_dst / script.name, 0o755)
-    print("✅ Added session management scripts")
+    # Create SHORT_IMPORTANT_MEMORY.md in .atlas from template
+    template = atlas_root / "SHORT_IMPORTANT_MEMORY_TEMPLATE.md"
+    if template.exists():
+        shutil.copy2(template, atlas_dir / "SHORT_IMPORTANT_MEMORY.md")
+        print("✅ Created .atlas/SHORT_IMPORTANT_MEMORY.md")
     
-    # Create SHORT_IMPORTANT_MEMORY.md if it doesn't exist
-    if not (project_root / "SHORT_IMPORTANT_MEMORY.md").exists():
-        template = atlas_root / "SHORT_IMPORTANT_MEMORY_TEMPLATE.md"
-        if template.exists():
-            shutil.copy2(template, project_root / "SHORT_IMPORTANT_MEMORY.md")
-            print("✅ Created SHORT_IMPORTANT_MEMORY.md")
+    # Update .gitignore
+    gitignore_additions = """
+# ATLAS Sessions and Memory
+.atlas/sessions/
+.atlas/WORKING_LOG/*/*/*.md
+.atlas/SHORT_IMPORTANT_MEMORY.md
+.atlas/MEMORY/PERSONAL_DIARY/*/*/*.md
+.atlas/MEMORY/KNOWLEDGE_LOG/*.md
+"""
+    
+    gitignore_path = project_root / ".gitignore"
+    if gitignore_path.exists():
+        # Check if we already have these entries
+        with open(gitignore_path, 'r') as f:
+            existing_content = f.read()
+        if ".atlas/sessions/" not in existing_content:
+            with open(gitignore_path, 'a') as f:
+                f.write(gitignore_additions)
+            print("✅ Updated .gitignore")
+    else:
+        with open(gitignore_path, 'w') as f:
+            f.write(gitignore_additions)
+        print("✅ Created .gitignore")
     
     print("""
 ✨ Migration complete!
 
-Your existing CLAUDE.md instructions are preserved in CLAUDE_PROJECT_SPECIFIC.md
+Your existing CLAUDE.md instructions are preserved in .atlas/CLAUDE_PROJECT_SPECIFIC.md
 and referenced from the new ATLAS-integrated CLAUDE.md.
 
 Next steps:
-1. Review CLAUDE_PROJECT_SPECIFIC.md and organize content into ATLAS structure
-2. Update SHORT_IMPORTANT_MEMORY.md with project details  
-3. Run: python scripts/save_session.py -c "ATLAS migration" -n "Continue development"
+1. Review .atlas/CLAUDE_PROJECT_SPECIFIC.md and organize content into ATLAS structure
+2. Update .atlas/SHORT_IMPORTANT_MEMORY.md with project details  
+3. Run: python .atlas/scripts/save_session.py -c "ATLAS migration" -n "Continue development"
 """)
 
 if __name__ == "__main__":
