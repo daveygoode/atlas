@@ -13,27 +13,41 @@ ATLAS is a comprehensive framework that transforms AI assistance into a persiste
 
 ## Quick Start
 
-### 1. Initial Setup
+### For New Projects
 
-Clone the repository:
 ```bash
-git clone https://github.com/daveygoode/atlas.git
-cd atlas
+# Clone ATLAS into your project
+cd your-project-directory
+git clone https://github.com/daveygoode/atlas.git .atlas
+cd .atlas
+
+# Run automated setup
+python scripts/setup_new_project.py
 ```
 
-### 2. Save Your Work Session
+### For Existing Projects with CLAUDE.md
 
-When ending a work session:
 ```bash
-python scripts/save_session.py -c "What you accomplished" -n "What needs to be done next"
+# Clone ATLAS
+git clone https://github.com/daveygoode/atlas.git .atlas_temp
+
+# Run migration
+python .atlas_temp/scripts/migrate_existing_project.py
 ```
 
-### 3. Resume Your Session
+### Daily Workflow
 
-When returning to work:
-```bash
-python scripts/resume_session.py
-```
+1. **Resume Session** (start of work):
+   ```bash
+   python scripts/resume_session.py
+   ```
+
+2. **Save Session** (end of work):
+   ```bash
+   python scripts/save_session.py -c "What you accomplished" -n "What needs to be done next"
+   ```
+
+See [SETUP_GUIDE.md](SETUP_GUIDE.md) for detailed setup instructions.
 
 ## Core Components
 
