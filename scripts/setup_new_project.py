@@ -2,7 +2,6 @@
 """
 Quick setup script for new projects
 """
-import os
 import shutil
 from pathlib import Path
 

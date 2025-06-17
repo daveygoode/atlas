@@ -4,8 +4,6 @@ Atlas Session Manager - Resume Session
 Integrates DevCycle session management with Atlas AI Agent framework
 """
 
-import os
-import sys
 import json
 import argparse
 from datetime import datetime
@@ -44,7 +42,7 @@ class AtlasSessionResumer:
                         "timestamp": data["timestamp"],
                         "context": data["context"][:50] + "..." if len(data["context"]) > 50 else data["context"]
                     })
-            except:
+            except (json.JSONDecodeError, KeyError, IOError):
                 continue
         
         return sessions

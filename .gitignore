@@ -39,3 +39,8 @@ Thumbs.db
 *.bak
 *.backup
 *~
+
+# Linting configuration
+ruff.toml
+.ruff_cache/
+.pre-commit-config.yaml

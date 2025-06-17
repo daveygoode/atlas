@@ -2,7 +2,6 @@
 """
 Migration script for projects with existing CLAUDE.md
 """
-import os
 import shutil
 from pathlib import Path
 from datetime import datetime
