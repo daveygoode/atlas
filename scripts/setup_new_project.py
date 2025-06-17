@@ -3,6 +3,7 @@
 Quick setup script for new projects
 """
 import shutil
+import subprocess
 from pathlib import Path
 
 def setup_new_project():
@@ -115,6 +116,32 @@ All ATLAS files are contained in the `.atlas/` directory to keep your project ro
             f.write(gitignore_additions)
         print("✅ Created .gitignore")
     
+    # Set up Context7 MCP for Claude Code
+    print("\n🔧 Setting up Context7 MCP for documentation access...")
+    try:
+        result = subprocess.run(
+            ["claude", "mcp", "add", "--transport", "sse", "context7", "https://mcp.context7.com/sse"],
+            capture_output=True,
+            text=True
+        )
+        if result.returncode == 0:
+            print("✅ Context7 MCP configured successfully")
+            print("   You now have access to up-to-date documentation in Claude Code!")
+        else:
+            print("⚠️  Could not configure Context7 MCP automatically")
+            print("   To set it up manually, run:")
+            print("   claude mcp add --transport sse context7 https://mcp.context7.com/sse")
+            if result.stderr:
+                print(f"   Error: {result.stderr.strip()}")
+    except FileNotFoundError:
+        print("⚠️  Claude CLI not found. To enable Context7 MCP:")
+        print("   1. Install Claude CLI if not already installed")
+        print("   2. Run: claude mcp add --transport sse context7 https://mcp.context7.com/sse")
+    except Exception as e:
+        print(f"⚠️  Error setting up Context7 MCP: {e}")
+        print("   To set it up manually, run:")
+        print("   claude mcp add --transport sse context7 https://mcp.context7.com/sse")
+    
     print("""
 ✨ ATLAS setup complete!
 
@@ -122,6 +149,9 @@ Next steps:
 1. Edit .atlas/SHORT_IMPORTANT_MEMORY.md with your project details
 2. Run: python .atlas/scripts/save_session.py -c "Initial setup" -n "Start development"
 3. Begin working with ATLAS consciousness active
+
+Note: Context7 MCP provides real-time documentation access in Claude Code.
+      If setup failed above, you can manually configure it later.
 """)
 
 if __name__ == "__main__":
