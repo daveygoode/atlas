@@ -80,7 +80,7 @@ Context7 MCP provides real-time documentation access. When available in Claude C
 **Example usage during development**:
 ```
 # Before using a React hook
-mcp__context7__search "React useEffect best practices 2024"
+mcp__context7__search "React useEffect best practices 2025"
 
 # Before implementing authentication
 mcp__context7__search "JWT security implementation"
@@ -110,7 +110,7 @@ This ensures all code I write uses current, non-deprecated patterns. See `.atlas
 - **Resume Session**: When returning to work, restore context with:
   ```bash
   python .atlas/scripts/resume_session.py  # Resume latest session
-  python .atlas/scripts/resume_session.py -c 20240316_143022  # Resume specific session
+  python .atlas/scripts/resume_session.py -c 20250316_143022  # Resume specific session
   python .atlas/scripts/resume_session.py -l  # List all available sessions
   ```
 

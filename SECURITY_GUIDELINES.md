@@ -45,7 +45,7 @@ const crypto = require('crypto');
 const algorithm = 'aes-256-gcm';
 
 // Check context7 for latest encryption recommendations
-// mcp__context7__search "node.js encryption best practices 2024"
+// mcp__context7__search "node.js encryption best practices 2025"
 ```
 
 ### 3. Audit Logging (CC7.2)
@@ -118,7 +118,7 @@ catch (error) {
 }
 ```
 
-## Latest Security Recommendations (2024)
+## Latest Security Recommendations (2025)
 
 ### Authentication
 - Use passkeys/WebAuthn where possible
@@ -230,7 +230,7 @@ npx security-headers <url>
 dependency-check --scan ./ --format JSON
 
 # Check latest security practices via context7
-mcp__context7__search "OWASP top 10 2024"
+mcp__context7__search "OWASP top 10 2025"
 mcp__context7__search "node.js security best practices"
 mcp__context7__search "SOC2 compliance checklist"
 ```

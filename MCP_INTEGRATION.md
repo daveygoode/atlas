@@ -69,14 +69,14 @@ python scripts/save_session.py \
 
 Working log entries should include:
 ```markdown
-## Session: 2024-03-16 14:30:00
+## Session: 2025-03-16 14:30:00
 
 ### Context
 Implemented user authentication with JWT
 
 ### Documentation Consulted (via context7)
 - JWT.io current best practices
-- OWASP authentication guidelines 2024
+- OWASP authentication guidelines 2025
 - Framework security updates
 
 ### Important Findings

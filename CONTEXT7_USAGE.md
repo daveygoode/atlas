@@ -6,7 +6,7 @@
 
 1. **Before Starting Any Implementation**
    ```
-   mcp__context7__search "React hooks best practices 2024"
+   mcp__context7__search "React hooks best practices 2025"
    mcp__context7__search "JWT implementation security"
    ```
 
@@ -47,7 +47,7 @@ mcp__context7__check_updates "nextjs" "current_version"
 Always verify current patterns:
 ```
 # Example: Before implementing authentication
-mcp__context7__search "jwt best practices 2024"
+mcp__context7__search "jwt best practices 2025"
 mcp__context7__search "oauth2 implementation guide"
 mcp__context7__get_doc "passport.js strategies"
 ```
@@ -56,7 +56,7 @@ mcp__context7__get_doc "passport.js strategies"
 
 Include findings in your working log:
 ```markdown
-## Session: 2024-03-16 14:30:00
+## Session: 2025-03-16 14:30:00
 
 ### Documentation Findings (via context7)
 - JWT: Now recommended to use refresh token rotation
@@ -69,8 +69,8 @@ Include findings in your working log:
 When you discover important changes:
 ```markdown
 ## Critical Notes
-- 2024-03-16: React 18.3 deprecates ReactDOM.render, use createRoot
-- 2024-03-16: Stripe API v2024-03-15 changes payment_intent flow
+- 2025-03-16: React 18.3 deprecates ReactDOM.render, use createRoot
+- 2025-03-16: Stripe API v2025-03-15 changes payment_intent flow
 ```
 
 ## Fallback When Context7 Unavailable
@@ -80,7 +80,7 @@ If MCP tools are not accessible:
 1. **Use WebSearch**
    ```
    WebSearch "React 18 best practices site:react.dev"
-   WebSearch "JWT implementation 2024 site:jwt.io"
+   WebSearch "JWT implementation 2025 site:jwt.io"
    ```
 
 2. **Verify with Official Docs**
@@ -108,13 +108,13 @@ mcp__context7__search "angular signals"
 ### Backend Patterns
 ```
 mcp__context7__search "nodejs clustering best practices"
-mcp__context7__search "express security middleware 2024"
+mcp__context7__search "express security middleware 2025"
 mcp__context7__search "fastify vs express performance"
 ```
 
 ### Security
 ```
-mcp__context7__search "owasp top 10 2024"
+mcp__context7__search "owasp top 10 2025"
 mcp__context7__search "jwt security vulnerabilities"
 mcp__context7__search "cors configuration best practices"
 ```
@@ -144,7 +144,7 @@ python scripts/resume_session.py
 mcp__context7__check_updates "react" "18.2.0"
 
 # 3. Research best practices
-mcp__context7__search "react form validation 2024"
+mcp__context7__search "react form validation 2025"
 mcp__context7__get_doc "react-hook-form v7"
 
 # 4. Implement with current patterns

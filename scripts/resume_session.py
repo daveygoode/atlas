@@ -206,7 +206,7 @@ def main():
         epilog="""
 Examples:
   python resume_session.py                    # Resume latest session
-  python resume_session.py -c 20240316_143022 # Resume specific session
+  python resume_session.py -c 20250316_143022 # Resume specific session
   python resume_session.py -l                 # List all sessions
   python resume_session.py --claude           # Generate Claude-friendly context
         """

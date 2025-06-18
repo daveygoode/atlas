@@ -39,7 +39,7 @@ Start of next session:
 python scripts/resume_session.py
 
 # Resume a specific session
-python scripts/resume_session.py -c 20240316_143022
+python scripts/resume_session.py -c 20250316_143022
 
 # List all available sessions
 python scripts/resume_session.py -l
